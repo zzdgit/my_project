@@ -1,0 +1,25 @@
+1-Bit Stochastic Gradient Descent and its Application to Data-Parallel Distributed Training of Speech DNNs
+
+环境变量： 
+export PYTHONPATH=$PYTHONPATH:/home/zhouzd2/temmsorflowprojects/eva_1.1/platform:/home/zhouzd2/temmsorflowprojects/eva_1.1/applications:/home/zhouzd2/temmsorflowprojects/eva_1.1/applications/facial_analysis/:/home/zhouzd2/temmsorflowprojects/eva_1.1/
+
+
+PYTHONPATH=$PYTHONPATH:/home/zhouzd2/temmsorflowprojects/eva_1.1/platform:/home/zhouzd2/temmsorflowprojects/eva_1.1/applications:/home/zhouzd2/temmsorflowprojects/eva_1.1/applications/facial_analysis/:/home/zhouzd2/temmsorflowprojects/eva_1.1/
+
+调试：
+CUDA_VISIBLE_DEVICES=0   python fa_train.py --train_dir=/home/$USER/train/smile --task=smile --batch_size=128 --learning_rate=0.001 --model_name=alexnet_v2 --num_clones=1 --job_name='worker' --ps_hosts='192.168.18.16:2218' --worker_hosts='192.168.18.16:2223,192.168.18.16:2224' --task_index=0
+
+
+
+CUDA_VISIBLE_DEVICES=0   python fa_train.py --train_dir=/home/$USER/train/smile --task=smile --batch_size=128 --learning_rate=0.001 --model_name=alexnet_v2 --num_clones=1 --job_name='worker' --ps_hosts='192.168.18.16:2218' --worker_hosts='192.168.18.16:2223,192.168.18.16:2224' --task_index=0  --reader_def=/home/zhouzd2/temmsorflowprojects/eva_1.1/applications/facial_analysis/read_demo.py
+
+
+
+CUDA_VISIBLE_DEVICES=0   python fa_train_bak.py --train_dir=/home/$USER/train/smile --task=smile --batch_size=128 --learning_rate=0.001 --model_name=alexnet_v2 --num_clones=1 --job_name='worker' --ps_hosts='192.168.18.16:2218' --worker_hosts='192.168.18.16:2223,192.168.18.16:2224' --task_index=1
+
+echo "===================================worker1==================================="
+    CUDA_VISIBLE_DEVICES=1   python fa_train.py --train_dir=/home/$USER/train/smile --task=smile --batch_size=128 --learning_rate=0.001 --model_name=alexnet_v2 --num_clones=1 --job_name='worker' --ps_hosts='192.168.17.167:2218' --worker_hosts='192.168.17.167:2223,192.168.17.167:2224' --task_index=1
+	
+	
+	
+CUDA_VISIBLE_DEVICES=0   python model_train.py --train_dir=/home/$USER/train/smile --task=smile --batch_size=128 --learning_rate=0.001 --model_name=alexnet_v2 --num_clones=1 --job_name='worker' --ps_hosts='192.168.18.16:2218' --worker_hosts='192.168.18.16:2223,192.168.18.16:2224' --task_index=0  --reader_def=/home/zhouzd2/temmsorflowprojects/eva_1.1/applications/facial_analysis/read_demo.py  --model_def=/home/zhouzd2/temmsorflowprojects/eva_1.1/applications/facial_analysis/model_loss_label.py
