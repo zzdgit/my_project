@@ -7,7 +7,7 @@ from django.shortcuts import render, HttpResponse
 
 def test(request):
     aa = 'hello word !'
-    return render(request, 'home.html', {'ff': aa})
+    return render(request, 'login.html', {'ff': aa})
     return HttpResponse(aa)
 
 
